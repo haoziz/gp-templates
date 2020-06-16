@@ -14,8 +14,6 @@ gp_tmpl_header();
 		<?php if ( GP::$permission->current_user_can( 'admin' ) ) : ?>
 			<?php gp_link( gp_url_project( '-new' ), __( 'Create a New Project', 'glotpress' ) ); ?>  &bull;&nbsp;
 		<?php endif; ?>
-
-		<?php gp_link( gp_url( '/languages' ), __( 'Projects by language', 'glotpress' ) ); ?>
 	</p>
 
 <?php
