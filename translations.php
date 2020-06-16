@@ -455,61 +455,7 @@ echo gp_pagination( $page, $per_page, $total_translations_count );
 ?>
 </div>
 <p class="clear actionlist secondary">
-	<?php
-		$footer_links = array();
-		if ( ( isset( $can_import_current ) && $can_import_current ) || ( isset( $can_import_waiting ) && $can_import_waiting ) ) {
-			$footer_links[] = gp_link_get( gp_url_project( $project, array( $locale->slug, $translation_set->slug, 'import-translations' ) ), __( 'Import Translations', 'glotpress' ) );
-		}
 
-		/**
-		 * The 'default' filter is 'Current/waiting/fuzzy + untranslated (All)', however that is not
-		 * the default action when exporting so make sure to set it on the export link if no filter
-		 * has been activated by the user.
-		 */
-		if ( ! array_key_exists( 'status', $filters ) ) {
-			$filters['status'] = 'current_or_waiting_or_fuzzy_or_untranslated';
-		}
-
-		$export_url     = gp_url_project( $project, array( $locale->slug, $translation_set->slug, 'export-translations' ) );
-		$export_link    = gp_link_get(
-			$export_url,
-			__( 'Export', 'glotpress' ),
-			array(
-				'id'      => 'export',
-				'filters' => add_query_arg( array( 'filters' => $filters ), $export_url ),
-			)
-		);
-		$format_options = array();
-		foreach ( GP::$formats as $slug => $format ) {
-			$format_options[ $slug ] = $format->name;
-		}
-		$what_dropdown   = gp_select(
-			'what-to-export',
-			array(
-				'all'      => _x( 'all current', 'export choice', 'glotpress' ),
-				'filtered' => _x( 'only matching the filter', 'export choice', 'glotpress' ),
-			),
-			'all'
-		);
-		$format_dropdown = gp_select( 'export-format', $format_options, 'po' );
-		/* translators: 1: export 2: what to export dropdown (all/filtered) 3: export format */
-		$footer_links[] = sprintf( __( '%1$s %2$s as %3$s', 'glotpress' ), $export_link, $what_dropdown, $format_dropdown );
-
-		/**
-		 * Filter footer links in translations.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param array              $footer_links    Default links.
-		 * @param GP_Project         $project         The current project.
-		 * @param GP_Locale          $locale          The current locale.
-		 * @param GP_Translation_Set $translation_set The current translation set.
-		 */
-		$footer_links = apply_filters( 'gp_translations_footer_links', $footer_links, $project, $locale, $translation_set );
-
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo implode( ' &bull; ', $footer_links );
-	?>
 </p>
 <?php
 gp_tmpl_footer();
