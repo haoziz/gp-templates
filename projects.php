@@ -4,8 +4,6 @@ gp_breadcrumb( array( __( 'Projects', 'glotpress' ) ) );
 gp_tmpl_header();
 ?>
 
-	<h2><?php _e( 'Projects', 'glotpress' ); ?></h2>
-
 	<ul>
 		<?php foreach ( $projects as $project ) : ?>
 			<li><?php gp_link_project( $project, esc_html( $project->name ) ); ?> <?php gp_link_project_edit( $project, null, array( 'class' => 'bubble' ) ); ?></li>

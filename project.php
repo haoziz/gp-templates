@@ -24,13 +24,6 @@ if ( $project->active ) {
 
 gp_tmpl_header();
 ?>
-<h2>
-	<?php
-	echo esc_html( $project->name );
-	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	echo $edit_link;
-	?>
-</h2>
 
 <?php
 /**
@@ -187,7 +180,6 @@ $project_class = $sub_projects ? 'with-sub-projects' : '';
 
 <?php if ( $sub_projects ) : ?>
 <div id="sub-projects">
-<h3><?php _e( 'Sub-projects', 'glotpress' ); ?></h3>
 <dl>
 <?php foreach ( $sub_projects as $sub_project ) : ?>
 	<dt>
